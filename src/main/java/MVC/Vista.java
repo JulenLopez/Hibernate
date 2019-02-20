@@ -77,5 +77,6 @@ public class Vista extends JFrame implements ChangeListener {
         List<Arma> armas = model.getArma();
         panelPersonaje.panelAnadirArma.cbArmas.inicializar(armas);
         panelPersonaje.panelAnadirArma.cbArmas.refrescar(model.getArmasLibres());
+        panelArmas.refrescarLista();
     }
 }

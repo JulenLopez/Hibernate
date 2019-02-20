@@ -144,7 +144,7 @@ public class JPanelArmas extends JPanel implements ActionListener, ListSelection
 		tfDurabilidad.setText("");
 	}
 
-	private void refrescarLista() {
+	public void refrescarLista() {
         Model model = new Model();
 	    mArma.removeAllElements();
 

@@ -28,6 +28,7 @@ public class JPanelPersonaje extends JPanel implements ActionListener, ListSelec
     public JPanelAnadirArma panelAnadirArma;
     public JLabel lblArma;
     public Personaje personajeSeleccionado;
+    public Personaje personajeBorrado;
     public boolean modificar;
 
     public JPanelPersonaje() {
@@ -96,6 +97,7 @@ public class JPanelPersonaje extends JPanel implements ActionListener, ListSelec
         panelBusqueda.lista.addListSelectionListener(this);
         refrescarLista();
         botonesCrud.addListeners(this);
+        btBorrarTodo.addActionListener(this);
         modificar=false;
 
         panelBusqueda.tfBuscar.getDocument().addDocumentListener(this);
@@ -104,6 +106,13 @@ public class JPanelPersonaje extends JPanel implements ActionListener, ListSelec
     @Override
     public void actionPerformed(ActionEvent e) {
         Model model = new Model();
+        if(e.getActionCommand().equals("Borrar todo")){
+            model.borrarTodo();
+            refrescarLista();
+        }else if(e.getActionCommand().equals("Deshacer borrado")){
+            model.deshacerBorrado(personajeBorrado);
+            refrescarLista();
+        }else
         switch (JBotonesCrud.Accion.valueOf(e.getActionCommand())){
             case NUEVO:
                 limpiar();
@@ -160,7 +169,7 @@ public class JPanelPersonaje extends JPanel implements ActionListener, ListSelec
                 modificar=true;
                 break;
             case BORRAR:
-                model.eliminar(personajeSeleccionado);
+                personajeBorrado=model.eliminar(personajeSeleccionado);
                 refrescarLista();
                 limpiar();
                 break;
@@ -187,7 +196,6 @@ public class JPanelPersonaje extends JPanel implements ActionListener, ListSelec
         }
         return personaje;
     }
-
 
     private void rellenarDatos(Personaje personaje){
         tfNombre.setText(personaje.getNombre());

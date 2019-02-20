@@ -2,6 +2,7 @@ package ejemplo;
 
 import base.Arma;
 import base.Personaje;
+import base.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -24,6 +25,7 @@ public class HibernateUtil {
         // Se registran las clases que hay que mapear con cada tabla de la base de datos
         configuration.addAnnotatedClass(Personaje.class);
         configuration.addAnnotatedClass(Arma.class);
+        configuration.addAnnotatedClass(User.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
                 configuration.getProperties()).build();
